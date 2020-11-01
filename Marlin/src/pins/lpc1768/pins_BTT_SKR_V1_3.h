@@ -382,3 +382,10 @@
 
 // Include common SKR pins
 #include "pins_BTT_SKR_common.h"
+
+#define SPINDLE_LASER_ENA_PIN P2_05 // Heated bed mosfet -> Test mode disable
+#define SPINDLE_LASER_PWM_PIN P2_03 // Fan mosfet -> Laser fire pin (PWMed)
+
+#define COOLANT_FLOOD_PIN P2_07 // Hot end 0 -> Coolant control
+
+#define FAN_PIN P2_04 // Hot end 1 -> Air assist control
