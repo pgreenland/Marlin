@@ -735,7 +735,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 157.575, 157.575, 4000, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 157.75, 157.75, 1, 1 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1116,8 +1116,8 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 350
-#define Y_BED_SIZE 200
+#define X_BED_SIZE 320
+#define Y_BED_SIZE (195 + 25) // to account for home offset of -25 set with "M206 X-25; M500"
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
