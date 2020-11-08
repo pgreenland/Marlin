@@ -110,7 +110,7 @@
 
 #if TEMP_SENSOR_CHAMBER == 1000
   #define CHAMBER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define CHAMBER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
+  #define CHAMBER_RESISTANCE_25C_OHMS  50000   // Resistance at 25C
   #define CHAMBER_BETA                 3950    // Beta value
 #endif
 
@@ -1876,7 +1876,7 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#define TX_BUFFER_SIZE 0
+#define TX_BUFFER_SIZE 128
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
@@ -2868,7 +2868,7 @@
   #define SPINDLE_LASER_PWM             true   // Set to "true" if your controller supports setting the speed/power
   #define SPINDLE_LASER_PWM_INVERT      false  // Set to "true" if the speed/power goes up when you want it to go slower
 
-  #define SPINDLE_LASER_FREQUENCY       5000   // (Hz) (200us) Spindle/laser frequency (only on supported HALs: AVR and LPC)
+  #define SPINDLE_LASER_FREQUENCY       2500   // (Hz) (200us) Spindle/laser frequency (only on supported HALs: AVR and LPC)
 
   /**
    * Speed / Power can be set ('M3 S') and displayed in terms of:
@@ -2915,7 +2915,7 @@
     #define SPEED_POWER_INTERCEPT         0    // (%) 0-100 i.e., Minimum power percentage
     #define SPEED_POWER_MIN               0    // (%) 0-100
     #define SPEED_POWER_MAX             100    // (%) 0-100
-    #define SPEED_POWER_STARTUP          80    // (%) M3/M4 speed/power default (with no arguments)
+    #define SPEED_POWER_STARTUP          10    // (%) M3/M4 speed/power default (with no arguments)
 
     /**
      * Enable inline laser power to be handled in the planner / stepper routines.
@@ -2946,14 +2946,14 @@
        * board isn't able to generate steps fast enough (and you are using LASER_POWER_INLINE_TRAPEZOID_CONT), increase this.
        * Note that when this is zero it means it occurs every cycle; 1 means a delay wait one cycle then run, etc.
        */
-      //#define LASER_POWER_INLINE_TRAPEZOID_CONT
+      #define LASER_POWER_INLINE_TRAPEZOID_CONT
 
       /**
        * Stepper iterations between power updates. Increase this value if the board
        * can't keep up with the processing demands of LASER_POWER_INLINE_TRAPEZOID_CONT.
        * Disable (or set to 0) to recalculate power on every stepper iteration.
        */
-      //#define LASER_POWER_INLINE_TRAPEZOID_CONT_PER 10
+      #define LASER_POWER_INLINE_TRAPEZOID_CONT_PER 10
 
       /**
        * Include laser power in G0/G1/G2/G3/G5 commands with the 'S' parameter
@@ -2963,10 +2963,10 @@
       #if ENABLED(LASER_MOVE_POWER)
         // Turn off the laser on G0 moves with no power parameter.
         // If a power parameter is provided, use that instead.
-        //#define LASER_MOVE_G0_OFF
+        #define LASER_MOVE_G0_OFF
 
         // Turn off the laser on G28 homing.
-        //#define LASER_MOVE_G28_OFF
+        #define LASER_MOVE_G28_OFF
       #endif
 
       /**
@@ -3198,17 +3198,23 @@
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
   //#define USER_SCRIPT_RETURN  // Return to status screen after a script
 
-  #define USER_DESC_1 "Enable Coolant Pump"
-  #define USER_GCODE_1 "M8"
+  #define USER_DESC_1 "Laser Power: Test"
+  #define USER_GCODE_1 "M6 V0"
 
-  #define USER_DESC_2 "Disable Coolant Pump"
-  #define USER_GCODE_2 "M9"
+  #define USER_DESC_2 "Laser Power: Run"
+  #define USER_GCODE_2 "M6 V1"
 
-  #define USER_DESC_3 "Enable Air-Assist"
-  #define USER_GCODE_3 "M106 S255"
+  #define USER_DESC_3 "Enable Coolant Pump"
+  #define USER_GCODE_3 "M8"
 
-  #define USER_DESC_4 "Disable Air-Assist"
-  #define USER_GCODE_4 "M107"
+  #define USER_DESC_4 "Disable Coolant Pump"
+  #define USER_GCODE_4 "M9"
+
+  #define USER_DESC_5 "Enable Air-Assist"
+  #define USER_GCODE_5 "M106 S255"
+
+  #define USER_DESC_6 "Disable Air-Assist"
+  #define USER_GCODE_6 "M107"
 #endif
 
 /**
